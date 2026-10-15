@@ -8,39 +8,6 @@ It **isn't** PyTorch.
 **Scope:** No 3D convolution/pooling, no GPU backend, no SIMD, no arbitrary computational graphs, no automatic differentiation engine, etc. In short: it has none of the features that make PyTorch an okay-ish ML platform. Hell, it doesn't even have: Dropout, regularisers, 3D-convolutions, or anything over and above what's needed to learn more complex stuff than MNIST/FashionMNIST. 
 
 
-## Repository layout
-
-
-```text
-.
-├── main.cpp
-├── README.md
-├── .clang-format
-├── include/
-│   ├── minitorch.hpp
-│   └── minitorch/
-│       ├── common.hpp
-│       ├── tensor.hpp
-│       ├── parameter.hpp
-│       ├── layer.hpp
-│       ├── loss.hpp
-│       ├── optimizer.hpp
-│       ├── dataset.hpp
-│       ├── sequential.hpp
-│       ├── layers/
-│       │   ├── dense.hpp
-│       │   ├── relu.hpp
-│       │   ├── flatten.hpp
-│       │   ├── conv2d.hpp
-│       │   └── maxpool2d.hpp
-│       └── io/
-│           └── idx.hpp
-└── data/
-    └── fashion-mnist/       # downloaded separately; not committed
-```
-
-The umbrella header `include/minitorch.hpp` should include the library headers needed by the example, including `minitorch/io/idx.hpp`. If you prefer granular includes, use individual headers instead.
-
 ## Quick start: 
 
 ### 1. Download and extract the four IDX files
@@ -75,8 +42,6 @@ data/fashion-mnist/t10k-images-idx3-ubyte
 data/fashion-mnist/t10k-labels-idx1-ubyte
 ```
 
-The loader expects the **uncompressed** files, not `.gz` files. As an optional integrity check, the standard training-images IDX file should have a 16-byte header plus 60,000 × 28 × 28 pixel bytes.
-
 ### 2. Point `main.cpp` at Fashion-MNIST
 
 Replace the two existing `load_idx()` calls with:
@@ -92,8 +57,6 @@ Dataset test = load_idx(
     "data/fashion-mnist/t10k-labels-idx1-ubyte"
 );
 ```
-
-
 
 ### 3. Compile with Clang++ 
 
@@ -111,14 +74,9 @@ g++ -std=c++17 -O3 -Wall -Wextra -Wpedantic \
 
 On macOS, `g++` might be an alias for Apple Clang. Use a Homebrew-installed versioned GCC executable (such as `g++-15`) if you specifically want GCC.
 
-## Example: build a convolutional classifier
+## Example: models can be built in PyTorch-style, e.g.
 
 ```cpp
-#include "minitorch.hpp"
-
-using namespace minitorch;
-
-int main() {
     Sequential model;
 
     model.add<Conv2D>(1, 16, 3)
@@ -132,16 +90,6 @@ int main() {
          .add<ReLU>()
          .add<Dense>(128, 10);
 
-    Adam optimizer(0.001f);
 
-    Dataset train = load_idx(
-        "data/fashion-mnist/train-images-idx3-ubyte",
-        "data/fashion-mnist/train-labels-idx1-ubyte",
-        1000
-    );
-
-    model.fit(train, optimizer, 5, 32);
-    model.save("fashion_mnist_model.txt");
-}
 ```
 
