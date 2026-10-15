@@ -91,3 +91,9 @@ g++ -std=c++17 -O3 -Wall -Wextra -Wpedantic \
 
 ```
 
+Then just run with 
+```bash
+./fashion_mnist
+
+```
+
