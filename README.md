@@ -5,7 +5,7 @@ Pytorch-style, fully C++17 native.
 Disclaimer: this is an educational, bare-bones 'PyTorch-style' project. 
 It **isn't** PyTorch. 
 
-**Scope:** No 3D convolution/pooling, no GPU backend, no SIMD, no arbitrary computational graphs, no automatic differentiation engine, etc. In short: it has none of the features that make PyTorch an okay-ish ML platform. Hell, it doesn't even have: Dropout, regularisers, 3D-convolutions, or anything over and above what's needed to learn more complex stuff than MNIST/FashionMNIST. 
+**Scope:** No 3D convolution/pooling, no GPU backend, no SIMD, no arbitrary computational graphs, no automatic differentiation engine, etc. In short: it has none of the features that make PyTorch an okay-ish ML platform. Hell, it doesn't even have: Dropout, regularisers, 3D-convolutions, or anything over and above what's needed to learn easy stuff like MNIST/FashionMNIST. 
 
 
 ## Quick start: 
