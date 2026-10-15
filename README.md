@@ -72,8 +72,6 @@ g++ -std=c++17 -O3 -Wall -Wextra -Wpedantic \
     -Iinclude main.cpp -o fashion_mnist
 ```
 
-On macOS, `g++` might be an alias for Apple Clang. Use a Homebrew-installed versioned GCC executable (such as `g++-15`) if you specifically want GCC.
-
 ## Example: models can be built in PyTorch-style, e.g.
 
 ```cpp
