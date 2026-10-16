@@ -32,7 +32,7 @@ namespace minitorch {
                     );
             Tensor dx = dy;
             dx.c = c_;
-            dx.d = d_;
+            dx.d = d_;s
             dx.h = h_;
             dx.w = w_;
             return dx;
