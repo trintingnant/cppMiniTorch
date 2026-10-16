@@ -24,7 +24,12 @@ namespace minitorch {
 
         Tensor backward(const Tensor& dy) override {
             dy.validate();
-            require(n_ && dy.n == n_ && dy.c == volume({c_, d_, h_, w_}) && dy.d == 1 && dy.h == 1 && dy.w == 1, "Flatten backward shape mismatch");
+            require(n_ && dy.n == n_ && 
+                    dy.c == volume({c_, d_, h_, w_}) && 
+                    dy.d == 1 && dy.h == 1 && 
+                    dy.w == 1, 
+                    "Flatten backward shape mismatch"
+                    );
             Tensor dx = dy;
             dx.c = c_;
             dx.d = d_;
